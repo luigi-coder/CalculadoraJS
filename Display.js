@@ -36,7 +36,9 @@ class Display {
         if(numero==='.' && this.valorActual.includes('.')){
             return 
         }
-        this.valorActual = this.valorActual.toString() + numero.toString();  
+
+        this.valorActual = this.valorActual.toString() + numero.toString(); 
+        console.log(this.valorActual) 
         this.imprimirValores(); 
     }
     imprimirValores(){
@@ -50,6 +52,27 @@ class Display {
         if(isNaN(valorActual) || isNaN(valorAnterior)){
             return 
         }
-        this.valorActual = this.calculadora[this.tipoOperacion](valorAnterior, valorActual);
+        // calcular la operacion
+        let resultado = 0;
+        switch(this.tipoOperacion){
+            case 'sumar':
+                resultado = this.calculadora.suma(valorAnterior, valorActual);
+                break;
+            case 'restar':
+                resultado = this.calculadora.restar(valorAnterior, valorActual);
+                break;
+            case 'multiplicar':
+                resultado = this.calculadora.multiplicar(valorAnterior, valorActual);
+                break;
+            case 'dividir':
+                resultado = this.calculadora.dividir(valorAnterior, valorActual);
+                break;
+            default:
+                break;
+        }
+        this.valorActual = resultado;
+        this.imprimirValores();
+        
+        /* this.valorActual = this.calculadora[this.tipoOperacion](valorAnterior, valorActual); */
     }
 }
